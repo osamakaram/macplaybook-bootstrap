@@ -13,8 +13,10 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install validation dependencies
-        run: brew install gitleaks just shellcheck trufflehog
+        run: |
+          brew untap aws/tap || true
+          brew install gitleaks just shellcheck trufflehog
       - name: Validate bootstrap
         run: just validate
